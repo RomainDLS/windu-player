@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+VARENVS = {
+    "MOVIE_PATH": os.environ['MOVIE_PATH']
+}
+
 
 # Application definition
 
@@ -52,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'winduplayer.urls'
+ROOT_URLCONF = 'conf.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'winduplayer.wsgi.application'
+WSGI_APPLICATION = 'conf.wsgi.application'
 
 
 # Database
