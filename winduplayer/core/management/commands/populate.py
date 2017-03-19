@@ -1,11 +1,15 @@
 from django.core.management import BaseCommand
-import os
 from conf.settings import VARENVS
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 from hachoir.stream.input import InputStreamError
 from sys import argv, stderr, exit
 from core.models import Movie
+
+from datetime import time
+
+import os
+import re
 
 
 class Command(BaseCommand):
@@ -38,5 +42,8 @@ class Command(BaseCommand):
         movie, new = Movie.objects.get_or_create(path=file)
         movie.title = '.'.join(file_name.split('.')[:-1])
         movie.file_type = file_name.split('.')[-1]
-        movie.duration = movie_metadata[1].split(':')[1].replace(' ','')
+        # extract time informations to datetime.time object
+        timeargs = re.split("hours|min|sec", movie_metadata[1].split(':')[1].replace(' ',''))[:-1]
+        timeargs = list(map(int, timeargs))
+        movie.duration = time(*timeargs)
         movie.save()

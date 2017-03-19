@@ -6,6 +6,6 @@ from .models import Movie
 class MovieAdmin(admin.ModelAdmin):
     model = Movie
 
-    list_display = ['title']
+    list_display = ['title', 'duration']
 
 admin.site.register(Movie, MovieAdmin)
