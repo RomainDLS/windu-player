@@ -6,6 +6,4 @@ from rest_framework.response import Response
 
 @api_view(['GET'])
 def movies(request):
-
-
     return  Response("Bonjour monde!")
