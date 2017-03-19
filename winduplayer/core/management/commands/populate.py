@@ -45,5 +45,8 @@ class Command(BaseCommand):
         # extract time informations to datetime.time object
         timeargs = re.split("hours|min|sec", movie_metadata[1].split(':')[1].replace(' ',''))[:-1]
         timeargs = list(map(int, timeargs))
-        movie.duration = time(*timeargs)
+        try:
+            movie.duration = time(*timeargs)
+        except ValueError:
+            print("Bad time interpretation :",  movie_metadata[1].split(':')[1].replace(' ',''))
         movie.save()
