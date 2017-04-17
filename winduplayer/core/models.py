@@ -8,4 +8,4 @@ class Movie(models.Model):
     released = models.DateTimeField(blank=True, null=True)
     file_type = models.CharField(max_length=44, blank=True)
     path = models.CharField(max_length=250, unique=True)
-    duration = models.TimeField(null=True)
+    duration = models.CharField(max_length=9, null=True)

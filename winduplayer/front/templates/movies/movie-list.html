@@ -26,7 +26,10 @@
             <div class="col-xs-8 col-xs-offset-1" style="background-color:lavenderblush;">
                 {{ movie.title }}
             </div>
-            <div class="col-xs-2" style="background-color:lavender;">
+            <button class="col-xs-1" onclick="play_movie(this.parentElement)">
+              Play
+            </button>
+            <div class="col-xs-1" style="background-color:lavender;">
                 {{ movie.duration }}
             </div>
             <label></label>

@@ -6,8 +6,6 @@ from hachoir.stream.input import InputStreamError
 from sys import exit
 from core.models import Movie
 
-from datetime import time
-
 import os
 import re
 
@@ -47,8 +45,10 @@ class Command(BaseCommand):
             timeargs = re.split(
                 "hours|min|sec",
                 movie_metadata[1].split(':')[1].replace(' ', ''))[:-1]
-            timeargs = list(map(int, timeargs))
-            movie.duration = time(*timeargs)
+            time_char_field = ""
+            for i, time_arg in enumerate(timeargs):
+                time_char_field += time_arg + "hms"[i]
+            movie.duration = time_char_field
         except ValueError:
             print(
                 "Bad time interpretation :",
