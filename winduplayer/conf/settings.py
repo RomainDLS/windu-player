@@ -25,7 +25,8 @@ SECRET_KEY = 'dmp=fi+tn$ic910$-=tg@74z&$3_@=+und!9g51lc1n-qnkm-c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', os.environ['PI_HOST']]
+ALLOWED_HOSTS = ['localhost', os.environ['PI_HOST'],
+                 'diffusion', '0.0.0.0']
 
 VARENVS = {
     "MOVIE_PATH": os.environ['MOVIE_PATH']

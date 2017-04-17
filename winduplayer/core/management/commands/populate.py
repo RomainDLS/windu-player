@@ -3,7 +3,7 @@ from conf.settings import VARENVS
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 from hachoir.stream.input import InputStreamError
-from sys import argv, stderr, exit
+from sys import exit
 from core.models import Movie
 
 from datetime import time
@@ -44,9 +44,13 @@ class Command(BaseCommand):
         movie.file_type = file_name.split('.')[-1]
         # extract time informations to datetime.time object
         try:
-            timeargs = re.split("hours|min|sec", movie_metadata[1].split(':')[1].replace(' ',''))[:-1]
+            timeargs = re.split(
+                "hours|min|sec",
+                movie_metadata[1].split(':')[1].replace(' ', ''))[:-1]
             timeargs = list(map(int, timeargs))
             movie.duration = time(*timeargs)
         except ValueError:
-            print("Bad time interpretation :",  movie_metadata[1].split(':')[1].replace(' ',''))
+            print(
+                "Bad time interpretation :",
+                movie_metadata[1].split(':')[1].replace(' ', ''))
         movie.save()
