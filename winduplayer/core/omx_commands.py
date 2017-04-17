@@ -7,11 +7,11 @@ FIFO_PATH = BASE_DIR + "/winduplayer/omxfifo"
 CMD_SEND_STR = " > " + FIFO_PATH
 
 
-def play_movie(movie):
+def play_movie(**kwargs):
+    movie = kwargs['movie']
     response = {'content': 'movie launched', 'status': 200}
     print(BASE_DIR)
     os.system("omxplayer -r {} {}".format(movie.path, FIFO_PATH))
-
     return response
 
 
