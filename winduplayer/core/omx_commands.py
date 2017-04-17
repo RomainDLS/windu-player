@@ -11,8 +11,8 @@ def play_movie(**kwargs):
     movie = kwargs['movie']
     response = {'content': 'movie launched', 'status': 200}
     print(BASE_DIR)
-    os.system("omxplayer -r {} {}".format(movie.path, FIFO_PATH))
     return response
+    os.system("omxplayer -r {} {}".format(movie.path, FIFO_PATH))
 
 
 def stop(**kwargs):

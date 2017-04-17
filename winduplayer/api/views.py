@@ -3,6 +3,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from threading import Thread
 from core.models import Movie
 from core import omx_commands
 
@@ -13,7 +14,8 @@ def global_cmd(request, movie_pk):
         movie = Movie.objects.get(pk=movie_pk)
         command = request.data['command']
     except Movie.DoesNotExist:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(data='Movie DoesNotExist',
+                        status=status.HTTP_400_BAD_REQUEST)
 
     response_data = 'Command {} not found'.format(command)
     r = dict(data=response_data, status=status.HTTP_400_BAD_REQUEST)
@@ -31,9 +33,11 @@ def global_cmd(request, movie_pk):
         'volume-down': 'volumedown',
         'volume-up': 'volumeup'
     }
-
-    command_function = getattr(omx_commands, command_map[command])
-    no_response = {'content': '', 'status': 200}
-    r = command_function(movie=movie) or no_response
+    try:
+        command_function = getattr(omx_commands, command_map[command])
+        Thread(target=command_function, kwargs=dict(movie=movie))
+        r = {'content': 'command sent successfully', 'status': 200}
+    except KeyError:
+        r = {'content': 'Unknown command {}'.format(command), 'status': 200}
 
     return Response(data=r['content'], status=r['status'])
