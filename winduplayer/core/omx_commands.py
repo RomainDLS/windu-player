@@ -8,11 +8,9 @@ CMD_SEND_STR = " > " + FIFO_PATH
 
 
 def play_movie(**kwargs):
-    movie = kwargs['movie']
-    response = {'content': 'movie launched', 'status': 200}
     print(BASE_DIR)
-    return response
-    os.system("omxplayer -r {} {}".format(movie.path, FIFO_PATH))
+    movie = kwargs['movie']
+    os.system("omxplayer -r {} {} &".format(movie.path, FIFO_PATH))
 
 
 def stop(**kwargs):

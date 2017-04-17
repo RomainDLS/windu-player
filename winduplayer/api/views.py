@@ -3,7 +3,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from threading import Thread
 from core.models import Movie
 from core import omx_commands
 
@@ -35,7 +34,7 @@ def global_cmd(request, movie_pk):
     }
     try:
         command_function = getattr(omx_commands, command_map[command])
-        Thread(target=command_function, kwargs=dict(movie=movie))
+        command_function(movie=movie)
         r = {'content': 'command sent successfully', 'status': 200}
     except KeyError:
         r = {'content': 'Unknown command {}'.format(command), 'status': 200}
