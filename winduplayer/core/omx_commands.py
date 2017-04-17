@@ -3,7 +3,7 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FIFO_PATH = BASE_DIR + "/winduplayer/omxfifo"
+FIFO_PATH = BASE_DIR + "/omxfifo"
 CMD_SEND_STR = " > " + FIFO_PATH
 
 
