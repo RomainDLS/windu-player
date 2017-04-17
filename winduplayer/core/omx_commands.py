@@ -15,43 +15,43 @@ def play_movie(**kwargs):
     return response
 
 
-def stop():
+def stop(**kwargs):
     os.system("echo -n q" + CMD_SEND_STR)
 
 
-def fastbackward():
+def fastbackward(**kwargs):
     os.system("echo -n $'\x1b\x5b\x42'" + CMD_SEND_STR)
 
 
-def backward():
+def backward(**kwargs):
     os.system("echo -n $'\x1b\x5b\x44'" + CMD_SEND_STR)
 
 
-def pause():
+def pause(**kwargs):
     os.system("echo -n p" + CMD_SEND_STR)
 
 
-def forward():
+def forward(**kwargs):
     os.system("echo -n $'\x1b\x5b\x43'" + CMD_SEND_STR)
 
 
-def fastforward():
+def fastforward(**kwargs):
     os.system("echo -n $'\x1b\x5b\x41'" + CMD_SEND_STR)
 
 
-def lang():
+def lang(**kwargs):
     os.system("echo -n k" + CMD_SEND_STR)
 
 
-def text():
+def text(**kwargs):
     os.system("echo -n m" + CMD_SEND_STR)
 
 
-def volumedown():
+def volumedown(**kwargs):
     os.system("echo -n '-'" + CMD_SEND_STR)
     os.system("echo -n '-'" + CMD_SEND_STR)
 
 
-def volumeup():
+def volumeup(**kwargs):
     os.system("echo -n '+' " + CMD_SEND_STR)
     os.system("echo -n '+' " + CMD_SEND_STR)
