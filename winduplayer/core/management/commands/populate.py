@@ -43,11 +43,11 @@ class Command(BaseCommand):
         # extract time informations to datetime.time object
         try:
             timeargs = re.split(
-                "hours|min|sec",
+                "days|hours|min|sec",
                 movie_metadata[1].split(':')[1].replace(' ', ''))[:-1]
             time_char_field = ""
             for i, time_arg in enumerate(timeargs):
-                time_char_field += time_arg + "hms"[i]
+                time_char_field += time_arg + "dhms"[i]
             movie.duration = time_char_field
         except ValueError:
             print(

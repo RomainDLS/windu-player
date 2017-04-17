@@ -22,7 +22,7 @@
 
     <div class="list">
         {% for movie in object_list %}
-          <div class="row">
+          <div class="row" id="{{ movie.pk }}">
             <div class="col-xs-8 col-xs-offset-1" style="background-color:lavenderblush;">
                 {{ movie.title }}
             </div>
