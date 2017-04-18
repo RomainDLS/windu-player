@@ -10,46 +10,46 @@ CMD_SEND_STR = " > " + FIFO_PATH
 def play_movie(**kwargs):
     print(BASE_DIR)
     movie = kwargs['movie']
-    os.system("omxplayer -r {} {} &".format(movie.path, FIFO_PATH))
+    os.system("screen -d -m -S omx_screen omxplayer -r {}".format(movie.path, FIFO_PATH))
 
 
 def stop(**kwargs):
-    os.system("echo -n q" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff q")
 
 
 def fastbackward(**kwargs):
-    os.system("echo -n $'\x1b\x5b\x42'" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff $'\x1b\x5b\x42'")
 
 
 def backward(**kwargs):
-    os.system("echo -n $'\x1b\x5b\x44'" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff $'\x1b\x5b\x44'")
 
 
 def pause(**kwargs):
-    os.system("echo -n p" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff p")
 
 
 def forward(**kwargs):
-    os.system("echo -n $'\x1b\x5b\x43'" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff $'\x1b\x5b\x43'")
 
 
 def fastforward(**kwargs):
-    os.system("echo -n $'\x1b\x5b\x41'" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff $'\x1b\x5b\x41'")
 
 
 def lang(**kwargs):
-    os.system("echo -n k" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff k")
 
 
 def text(**kwargs):
-    os.system("echo -n m" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff m")
 
 
 def volumedown(**kwargs):
-    os.system("echo -n '-'" + CMD_SEND_STR)
-    os.system("echo -n '-'" + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff '-'")
+    os.system("screen -S omx_screen -X stuff '-'")
 
 
 def volumeup(**kwargs):
-    os.system("echo -n '+' " + CMD_SEND_STR)
-    os.system("echo -n '+' " + CMD_SEND_STR)
+    os.system("screen -S omx_screen -X stuff '+' ")
+    os.system("screen -S omx_screen -X stuff '+' ")
