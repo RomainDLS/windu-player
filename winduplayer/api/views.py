@@ -9,12 +9,11 @@ from core import omx_commands
 
 @api_view(['POST'])
 def global_cmd(request, movie_pk):
+    command = request.data['command']
     try:
         movie = Movie.objects.get(pk=movie_pk)
-        command = request.data['command']
     except Movie.DoesNotExist:
-        return Response(data='Movie DoesNotExist',
-                        status=status.HTTP_400_BAD_REQUEST)
+        movie = movie_pk
 
     response_data = 'Command {} not found'.format(command)
     r = dict(data=response_data, status=status.HTTP_400_BAD_REQUEST)

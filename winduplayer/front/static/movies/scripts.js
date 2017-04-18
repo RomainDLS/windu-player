@@ -6,7 +6,8 @@ function play_movie(row){
 function show_sub_div(row){
   sub_line = document.createElement('div');
   sub_line.className = 'row';
-  sub_line.id = "sub_div"
+  sub_line.id = "sub_div";
+
   // add div
   if (row.nextSibling) {
     row.parentNode.insertBefore(sub_line, row.nextSibling);
@@ -25,11 +26,6 @@ function send_command(command, movie_pk){
   //Send the proper header information along with the request
   http.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
 
-  http.onreadystatechange = function() {//Call a function when the state changes.
-      if(http.readyState == 4 && http.status == 200) {
-          alert(http.responseText);
-      }
-  }
   http.send(params);
 }
 
