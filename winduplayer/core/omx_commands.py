@@ -3,8 +3,9 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FIFO_PATH = BASE_DIR + "/omxfifo"
-CMD_SEND_STR = " > " + FIFO_PATH
+FIFO_PATH = (BASE_DIR + "/omxfifo")
+FIFO_PATH = FIFO_PATH.replace("'", "\'")
+FIFO_PATH = FIFO_PATH.replace(" ", "\ ")
 
 
 def play_movie(**kwargs):
