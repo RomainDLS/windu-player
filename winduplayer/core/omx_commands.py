@@ -9,9 +9,12 @@ FIFO_PATH = FIFO_PATH.replace(" ", "\ ")
 
 
 def play_movie(**kwargs):
-    print(BASE_DIR)
-    movie = kwargs['movie']
-    os.system("screen -d -m -S omx_screen omxplayer -r {}".format(movie.path, FIFO_PATH))
+    movie_path = kwargs['movie'].path
+    movie_path = movie_path.replace("'", "\\'")
+    movie_path = movie_path.replace(" ", "\\ ")
+    print(movie_path)
+    os.system("screen -X -S omx_screen quit")
+    os.system("screen -d -m -S omx_screen omxplayer -r {}".format(movie_path))
 
 
 def stop(**kwargs):
