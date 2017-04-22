@@ -15,57 +15,67 @@
 </head>
 
 <body>
-  <section id="todoapp">
-    <header class="col-xs-offset-1">
+  <div class="container">
+    <div class="row">
       <h1>{% trans 'Movies' %}</h1>
-    </header>
-
-    <div class="list">
-        {% for movie in object_list %}
-          <div class="row" id="{{ movie.pk }}">
-            <div class="col-xs-8 col-xs-offset-1" style="background-color:lavenderblush;">
-                {{ movie.title }}
-            </div>
-            <button class="col-xs-1" onclick="play_movie(this.parentElement)">
-              Play
-            </button>
-            <div class="col-xs-1" style="background-color:lavender;">
-                {{ movie.duration }}
-            </div>
-            <label></label>
-          </div>
-        {% endfor %}
     </div>
-  </section>
-</body>
-<div class="container" style="position: fixed">
-  <div class="footer">
-    <div class="row" >
-       <button class="col-xs-1 col-xs-offset-1" onclick="send_command('stop', 0)">
-         stop
-       </button>
-       <button class="col-xs-1" onclick="send_command('fast-backward', 0)">
-         fast-backward
-       </button>
-       <button class="col-xs-1" onclick="send_command('backward', 0)">
-         backward
-       </button>
-       <button class="col-xs-1" onclick="send_command('pause', 0)">
-         pause
-       </button>
-       <button class="col-xs-1" onclick="send_command('forward', 0)">
-         forward
-       </button>
-       <button class="col-xs-1" onclick="send_command('fast-forward', 0)">
-         fast-forward
-       </button>
-       <button class="col-xs-1" onclick="send_command('volume-down', 0)">
-         volume-down
-       </button>
-       <button class="col-xs-1" onclick="send_command('volume-up', 0)">
-         volume-up
-       </button>
+
+    <div class="row">
+      <table class="table" id="movie_list">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th> </th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for movie in object_list %}
+          <tr id="{{ movie.pk }}">
+            <th style="background-color:lavenderblush;">
+                {{ movie.title }}
+            </th>
+            <th>
+              <button onclick="play_movie(this.parentElement.parentElement.id)">
+                Play
+              </button>
+            </th>
+            <th style="background-color:lavender;">
+                {{ movie.duration }}
+            </th>
+          </tr>
+          <tr id="sub_row{{ movie.pk }}" style="display: none;">
+            <th>
+             <button onclick="send_command('stop', 0)">
+               stop
+             </button>
+             <button onclick="send_command('fast-backward', 0)">
+               fast-backward
+             </button>
+             <button onclick="send_command('backward', 0)">
+               backward
+             </button>
+             <button onclick="send_command('pause', 0)">
+               pause
+             </button>
+             <button onclick="send_command('forward', 0)">
+               forward
+             </button>
+             <button onclick="send_command('fast-forward', 0)">
+               fast-forward
+             </button>
+             <button onclick="send_command('volume-down', 0)">
+               volume-down
+             </button>
+             <button onclick="send_command('volume-up', 0)">
+               volume-up
+             </button>
+            </th>
+         </tr>
+        {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
-</div>
+</body>
 </html>

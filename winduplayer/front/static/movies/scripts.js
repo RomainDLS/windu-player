@@ -1,19 +1,18 @@
-function play_movie(row){
-  send_command('play', row.id);
-  show_sub_div(row);
+function play_movie(id){
+  send_command('play', id);
+  show_sub_div(id);
 }
 
-function show_sub_div(row){
-  sub_line = document.createElement('div');
-  sub_line.className = 'row';
-  sub_line.id = "sub_div";
-
-  // add div
-  if (row.nextSibling) {
-    row.parentNode.insertBefore(sub_line, row.nextSibling);
-  } else {
-    row.parentNode.appendChild(sub_line);
+function show_sub_div(id){
+  // Hide openned sub row
+  div_list = document.getElementById('movie_list').children[1].children;
+  for (i=0; i<div_list.length; i++){
+    if (!div_list[i].id.match(/^\d+$/)) {
+      div_list[i].style.display = "None";
+    }
   }
+
+  document.getElementById("sub_row" + id).style.display = "block";
 }
 
 function send_command(command, movie_pk){
