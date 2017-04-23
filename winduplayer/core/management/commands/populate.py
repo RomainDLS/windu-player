@@ -14,6 +14,7 @@ class Command(BaseCommand):
     help = 'Populate app database with movie folder'
 
     def handle(self, *args, **options):
+        Movie.objects.all().delete()
         for file in os.listdir(VARENVS['MOVIE_PATH']):
             try:
                 self.parse_file(os.path.join(VARENVS['MOVIE_PATH'], file))
@@ -48,7 +49,7 @@ class Command(BaseCommand):
             time_char_field = ""
             for i, time_arg in enumerate(timeargs[::-1]):
                 time_char_field = time_arg + "smhd"[i] + time_char_field
-            movie.duration = time_char_field
+            movie.duration = time_char_field if time_char_field else " - "
         except ValueError:
             print(
                 "Bad time interpretation :",

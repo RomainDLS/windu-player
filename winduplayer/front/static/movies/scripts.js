@@ -1,17 +1,29 @@
-function play_movie(id){
-  send_command('play', id);
-  show_sub_div(id);
+function play_pause(button, id){
+  // No movie is playing
+  if (button.children[0].style.display == "none"){
+    send_command('play', id);
+    button.children[0].style.display = "";
+    button.children[1].style.display = "none";
+  // Movie is playing
+  } else if (button.children[1].style.display == "none"){
+    send_command('pause', id);
+    button.children[0].style.display = "none";
+    button.children[1].style.display = "";
+  }
 }
 
-function show_sub_div(id){
+function show_sub_div(row, id){
   // Hide openned sub row
   div_list = document.getElementById('movie_list').children[1].children;
   for (i=0; i<div_list.length; i++){
-    if (!div_list[i].id.match(/^\d+$/)) {
+    if (div_list[i].id.match(/^sub_row\d+$/)) {
       div_list[i].style.display = "None";
+    } else if (div_list[i].id.match(/^row\d+$/)) {
+      div_list[i].className = "active";
     }
   }
 
+  row.className = "info"
   document.getElementById("sub_row" + id).style.display = "block";
 }
 

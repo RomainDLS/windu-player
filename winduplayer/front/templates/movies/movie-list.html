@@ -10,8 +10,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   {% load static %}
   <script src="{% static 'movies/scripts.js' %}"></script>
+  <link href="{% static 'movies/movie-list.css' %}" type="text/css" rel="stylesheet"/>
 
-  <title>{% trans 'Movie List' %}</title>
+  <title>{% trans 'Windu player - movies' %}</title>
 </head>
 
 <body>
@@ -24,53 +25,50 @@
       <table class="table" id="movie_list">
         <thead>
           <tr>
-            <th>Name</th>
-            <th> </th>
-            <th>Duration</th>
+            <td>Name</td>
+            <td style="text-align:center;">Duration</td>
           </tr>
         </thead>
         <tbody>
         {% for movie in object_list %}
-          <tr id="{{ movie.pk }}">
-            <th style="background-color:lavenderblush;">
+          <tr id="row{{ movie.pk }}" class="active" onclick="show_sub_div(this, {{ movie.pk }})">
+            <td>
                 {{ movie.title }}
-            </th>
-            <th>
-              <button onclick="play_movie(this.parentElement.parentElement.id)">
-                Play
-              </button>
-            </th>
-            <th style="background-color:lavender;">
+            </td>
+            <td style="text-align:center;">
                 {{ movie.duration }}
-            </th>
+            </td>
           </tr>
           <tr id="sub_row{{ movie.pk }}" style="display: none;">
-            <th>
-             <button onclick="send_command('stop', 0)">
-               stop
-             </button>
-             <button onclick="send_command('fast-backward', 0)">
-               fast-backward
-             </button>
-             <button onclick="send_command('backward', 0)">
-               backward
-             </button>
-             <button onclick="send_command('pause', 0)">
-               pause
-             </button>
-             <button onclick="send_command('forward', 0)">
-               forward
-             </button>
-             <button onclick="send_command('fast-forward', 0)">
-               fast-forward
-             </button>
-             <button onclick="send_command('volume-down', 0)">
-               volume-down
-             </button>
-             <button onclick="send_command('volume-up', 0)">
-               volume-up
-             </button>
-            </th>
+            <td style="padding: 1px;">
+              <div class=command_row>
+                <button onclick="send_command('fast-backward', 0)">
+                 <img src="{% static 'movies/fast_backward_button.png' %}" style="width:24px;height:24px;">
+                </button>
+                <button onclick="send_command('backward', 0)">
+                 <img src="{% static 'movies/backward_button.png' %}" style="width:24px;height:24px;">
+                </button>
+                <button onclick="send_command('stop', 0)">
+                  <img src="{% static 'movies/stop_button.png' %}" style="width:24px;height:24px;">
+                </button>
+                <button onclick="play_pause(this, {{ movie.pk }})">
+                  <img src="{% static 'movies/play_button.png' %}" style="width:24px;height:24px;">
+                  <img src="{% static 'movies/pause_button.png' %}" style="width:24px;height:24px; display: none;">
+                </button>
+                <button onclick="send_command('forward', 0)">
+                 <img src="{% static 'movies/forward_button.png' %}" style="width:24px;height:24px;">
+                </button>
+                <button onclick="send_command('fast-forward', 0)">
+                 <img src="{% static 'movies/fast_forward_button.png' %}" style="width:24px;height:24px;">
+                </button>
+                <button onclick="send_command('volume-down', 0)">
+                 <img src="{% static 'movies/volume_down_button.png' %}" style="width:24px;height:24px;">
+                </button>
+                <button onclick="send_command('volume-up', 0)">
+                 <img src="{% static 'movies/volume_up_button.png' %}" style="width:24px;height:24px;">
+                </button>
+              </div>
+            </td>
          </tr>
         {% endfor %}
         </tbody>
