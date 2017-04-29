@@ -34,7 +34,8 @@ def global_cmd(request, movie_pk):
     try:
         command_function = getattr(omx_commands, command_map[command])
         command_function(movie=movie)
-        r = {'content': 'command sent successfully', 'status': 200}
+        print('Command {} sent successfully'.format(command_map[command]))
+        r = {'content': 'command sent successfully', 'status': 201}
     except KeyError:
         r = {'content': 'Unknown command {}'.format(command), 'status': 200}
 
