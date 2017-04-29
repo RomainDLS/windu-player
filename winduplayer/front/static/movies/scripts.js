@@ -1,12 +1,12 @@
 function play_pause(button, id){
   // No movie is playing
   if (button.children[0].style.display == "none"){
-    send_command('play', id);
+    send_command('pause', id);
     button.children[0].style.display = "";
     button.children[1].style.display = "none";
   // Movie is playing
   } else if (button.children[1].style.display == "none"){
-    send_command('pause', id);
+    send_command('play', id);
     button.children[0].style.display = "none";
     button.children[1].style.display = "";
   }
