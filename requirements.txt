@@ -1,4 +1,5 @@
 django>=1.10.3,<1.11
 djangorestframework>=3.5.2,<3.6
 ipython==5.1.0
-hachoir3
+# hachoir3
+git+git://github.com/haypo/hachoir3@master
