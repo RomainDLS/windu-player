@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
+from core.management.commands import populate
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FIFO_PATH = (BASE_DIR + "/omxfifo")
-FIFO_PATH = FIFO_PATH.replace("'", "\'")
-FIFO_PATH = FIFO_PATH.replace(" ", "\ ")
+
+def update_movie_list(**kwargs):
+    command = populate.Command()
+    command.handle()
 
 
 def play_movie(**kwargs):
