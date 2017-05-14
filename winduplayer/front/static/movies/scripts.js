@@ -1,3 +1,6 @@
+var IS_MOVIE_RUNNING = false;
+
+
 function play_pause(button, id){
   // No movie is playing
   if (button.children[0].style.display == "none"){
@@ -6,7 +9,13 @@ function play_pause(button, id){
     button.children[1].style.display = "none";
   // Movie is playing
   } else if (button.children[1].style.display == "none"){
-    send_command('play', id);
+    if (IS_MOVIE_RUNNING != id){
+      send_command('play', id);
+      IS_MOVIE_RUNNING = id;
+    } else {
+      send_command('pause', id);
+    }
+
     button.children[0].style.display = "none";
     button.children[1].style.display = "";
   }
