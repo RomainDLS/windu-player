@@ -11,3 +11,10 @@ __pycache__/
 ###########
 
 db.sqlite3
+
+
+##############
+# test files #
+##############
+
+movie_test_set/
